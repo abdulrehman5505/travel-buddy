@@ -9,16 +9,16 @@ import com.project.travelbuddy.R
 import com.project.travelbuddy.databinding.FragmentSignInBinding
 import com.project.travelbuddy.util.Constant.showToast
 import com.project.travelbuddy.util.Constant.validateData
-
+ 
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
-
-    private lateinit var binding: FragmentSignInBinding
+ 
+    private lateinit var binding: FragmentSignInBinding 
     private lateinit var auth: FirebaseAuth
-
+ 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState) 
 
-        binding = FragmentSignInBinding.bind(view)
+        binding = FragmentSignInBinding.bind(view) 
         auth = FirebaseAuth.getInstance()
 
         if (auth.currentUser != null) {

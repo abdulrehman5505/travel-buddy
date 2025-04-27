@@ -11,26 +11,26 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.project.travelbuddy.R
+import com.project.travelbuddy.R 
 import com.project.travelbuddy.databinding.FragmentEditPostBinding
-import com.project.travelbuddy.model.TravelPost
-import com.project.travelbuddy.util.Constant.showToast
-import com.squareup.picasso.Picasso
+import com.project.travelbuddy.model.TravelPost 
+import com.project.travelbuddy.util.Constant.showToast 
+import com.squareup.picasso.Picasso 
 
 class EditPostFragment : Fragment(R.layout.fragment_edit_post) {
 
     private lateinit var binding: FragmentEditPostBinding
-    private lateinit var firestore: FirebaseFirestore
-    private lateinit var storageRef: StorageReference
-    private var postId: String? = null
-    private var currentImageUrl: String? = null
-    private var newImageUri: Uri? = null
-
+    private lateinit var firestore: FirebaseFirestore 
+    private lateinit var storageRef: StorageReference 
+    private var postId: String? = null 
+    private var currentImageUrl: String? = null 
+    private var newImageUri: Uri? = null 
+ 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentEditPostBinding.bind(view)
-        firestore = FirebaseFirestore.getInstance()
+        super.onViewCreated(view, savedInstanceState) 
+ 
+        binding = FragmentEditPostBinding.bind(view) 
+        firestore = FirebaseFirestore.getInstance() 
         storageRef = FirebaseStorage.getInstance().reference.child("posts")
 
         arguments?.let {

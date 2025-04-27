@@ -1,47 +1,47 @@
 package com.project.travelbuddy.view
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
+import android.app.Activity 
+import android.content.Intent 
+import android.net.Uri 
 import android.os.Bundle
-import android.provider.MediaStore
-import android.view.View
+import android.provider.MediaStore 
+import android.view.View 
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.project.travelbuddy.R
+import com.project.travelbuddy.R 
 import com.project.travelbuddy.databinding.FragmentAddPostBinding
-import com.project.travelbuddy.model.TravelPost
-import com.project.travelbuddy.util.Constant
+import com.project.travelbuddy.model.TravelPost 
+import com.project.travelbuddy.util.Constant 
 import com.project.travelbuddy.util.Constant.showToast
-
+ 
 class AddPostFragment : Fragment(R.layout.fragment_add_post) {
-
-    private lateinit var binding: FragmentAddPostBinding
-    private lateinit var storageRef: StorageReference
-    private lateinit var firestore: FirebaseFirestore
-    private lateinit var auth: FirebaseAuth
-    private var imageUri: Uri? = null
-    private var latitude: Double? = null
-    private var longitude: Double? = null
-
+ 
+    private lateinit var binding: FragmentAddPostBinding 
+    private lateinit var storageRef: StorageReference 
+    private lateinit var firestore: FirebaseFirestore 
+    private lateinit var auth: FirebaseAuth 
+    private var imageUri: Uri? = null 
+    private var latitude: Double? = null 
+    private var longitude: Double? = null  
+ 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentAddPostBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState) 
+        binding = FragmentAddPostBinding.bind(view) 
 
         storageRef = FirebaseStorage.getInstance().reference.child("posts")
-        firestore = FirebaseFirestore.getInstance()
-        auth = FirebaseAuth.getInstance()
-
+        firestore = FirebaseFirestore.getInstance() 
+        auth = FirebaseAuth.getInstance() 
+ 
         binding.btnPickImage.setOnClickListener { pickImage() }
         binding.btnSubmitPost.setOnClickListener { uploadPost() }
-        binding.btnPickLocation.setOnClickListener {
+        binding.btnPickLocation.setOnClickListener { 
             val locationPickerIntent = Intent(context, LocationPickerActivity::class.java)
             startActivityForResult(locationPickerIntent, LOCATION_PICK_REQUEST)
-        }
+        } 
     }
 
     private fun pickImage() {

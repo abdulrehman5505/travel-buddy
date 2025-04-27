@@ -14,7 +14,7 @@ import com.project.travelbuddy.repo.CountryRepository
 import com.project.travelbuddy.util.Constant
 import com.project.travelbuddy.viewmodel.CountryViewModel
 import com.project.travelbuddy.viewmodel.CountryViewModelFactory
-
+          
 class ExploreFragment : Fragment(R.layout.fragment_explore) {
 
     private lateinit var binding: FragmentExploreBinding

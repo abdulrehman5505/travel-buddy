@@ -23,17 +23,17 @@ import com.project.travelbuddy.util.Constant.showToast
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
-
+ 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var firestore: FirebaseFirestore
     private lateinit var storageRef: StorageReference
     private lateinit var auth: FirebaseAuth
     private lateinit var adapter: TravelPostAdapter
     private var newImageUri: Uri? = null
-
+ 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+ 
         binding = FragmentProfileBinding.bind(view)
         firestore = FirebaseFirestore.getInstance()
         storageRef = FirebaseStorage.getInstance().reference.child("users")
