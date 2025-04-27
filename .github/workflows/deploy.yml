@@ -3,35 +3,39 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger workflow on push to main branch
+      - main  # Trigger on main branch push (adjust as needed)
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Specify the OS for GitHub runner
-
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'  # The version of JDK you want to use
-          distribution: 'adoptopenjdk'  # Distribution name (adoptopenjdk, temurin, etc.)
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'  # Use your desired Java version
+        distribution: 'adoptium'  # Use Adoptium distribution
 
-      - name: Install dependencies and run tests
-        run: ./gradlew build test  # Runs build and tests using Gradle
+    - name: Install dependencies
+      run: ./gradlew build  # Adjust depending on your build tool (e.g., Gradle or Maven)
 
-      - name: Build the project
-        run: ./gradlew build  # Builds the project
+    - name: Run unit tests
+      run: ./gradlew test  # Adjust this for your test framework (e.g., JUnit, TestNG)
 
-      - name: Deploy to Vercel
-        run: |
-          curl -s https://vercel.com/download > vercel-cli.deb
-          sudo dpkg -i vercel-cli.deb
-          vercel --prod  # Deploy to Vercel
+    - name: Build application
+      run: ./gradlew build  # Adjust based on your build tool
 
-      - name: Deploy to Render
-        run: |
-          curl -fsSL https://cli.render.com | bash
-          render deploy --prod  # Deploy to Render
+    - name: Deploy to Vercel
+      run: |
+        curl -s https://vercel.com/download > vercel-cli.deb
+        sudo dpkg -i vercel-cli.deb
+        vercel --prod  # Adjust as necessary for your Vercel setup
+
+    - name: Deploy to Render
+      run: |
+        # Similar steps to deploy to Render, adjust accordingly
+        curl -fsSL https://cli.render.com | bash
+        render deploy --prod
