@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+# Trigger the workflow on push to the main branch
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on push to main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Specify the OS for GitHub runner
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up JDK (adjust the version as per your Kotlin version)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'  # Set the correct JDK version
+
+      # Install dependencies and run unit tests
+      - name: Install dependencies and run tests
+        run: ./gradlew build test  # Adjust for your build tool (e.g., Gradle)
+
+      # Build the project
+      - name: Build the project
+        run: ./gradlew build  # This will build your Kotlin project
+
+      # Deploy to Vercel
+      - name: Deploy to Vercel
+        run: |
+          curl -s https://vercel.com/download > vercel-cli.deb
+          sudo dpkg -i vercel-cli.deb
+          vercel --prod  # Ensure your Vercel project is set up
+
+      # Deploy to Render
+      - name: Deploy to Render
+        run: |
+          curl -fsSL https://cli.render.com | bash
+          render deploy --prod  # Adjust this as necessary for Render deployment
