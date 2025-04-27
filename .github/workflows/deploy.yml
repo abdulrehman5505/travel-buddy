@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'  # Use your desired Java version
-        distribution: 'adoptium'  # Use Adoptium distribution
+        distribution: 'temurin'  # Use Adoptium distribution
 
     - name: Install dependencies
       run: ./gradlew build  # Adjust depending on your build tool (e.g., Gradle or Maven)
