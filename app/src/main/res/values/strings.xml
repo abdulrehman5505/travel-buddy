@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">TravelBuddy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="log_in_to_continue">Log In to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="log_in">Log In</string>
+    <string name="new_on_here">New on here?</string>
+    <string name="sign_up"><u>Sign Up</u></string>
+    <string name="get_started">Get Started !</string>
+    <string name="already_account">Already have an account?</string>
+    <string name="sign_in"><u>Log In</u></string>
+    <string name="fill">Fill in all fields to complete your registration.</string>
+    <string name="email_address">Email Address</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="register">Register</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="map_api_key">AIzaSyDSczA0tIM-ERX2TG8dOu_F68Se3aqBHUw</string>
+</resources>
