@@ -3,12 +3,12 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger on main branch push (adjust as needed)
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -16,26 +16,25 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '17'  
-        distribution: 'temurin'  
+        java-version: '17'
+        distribution: 'temurin'
 
-    - name: Install dependencies
-      run: ./gradlew build  
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
+    - name: Build app
+      run: ./gradlew build
 
     - name: Run unit tests
-      run: ./gradlew test  
-
-    - name: Build application
-      run: ./gradlew build  
+      run: ./gradlew test
 
     - name: Deploy to Vercel
-      run: |
-        curl -s https://vercel.com/download > vercel-cli.deb
-        sudo dpkg -i vercel-cli.deb
-        vercel --prod  # Adjust as necessary for your Vercel setup
+      env:
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      run: npx vercel deploy --prod --yes --token=$VERCEL_TOKEN
 
     - name: Deploy to Render
-      run: |
-        # Similar steps to deploy to Render, adjust accordingly
-        curl -fsSL https://cli.render.com | bash
-        render deploy --prod
+      if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
+      run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
