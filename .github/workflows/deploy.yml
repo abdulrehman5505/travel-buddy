@@ -16,17 +16,17 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '17'  # Use your desired Java version
-        distribution: 'temurin'  # Use Adoptium distribution
+        java-version: '17'  
+        distribution: 'temurin'  
 
     - name: Install dependencies
-      run: ./gradlew build  # Adjust depending on your build tool (e.g., Gradle or Maven)
+      run: ./gradlew build  
 
     - name: Run unit tests
-      run: ./gradlew test  # Adjust this for your test framework (e.g., JUnit, TestNG)
+      run: ./gradlew test  
 
     - name: Build application
-      run: ./gradlew build  # Adjust based on your build tool
+      run: ./gradlew build  
 
     - name: Deploy to Vercel
       run: |
