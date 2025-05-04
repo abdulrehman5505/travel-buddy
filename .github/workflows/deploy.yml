@@ -1,41 +1,28 @@
-name: CI/CD Pipeline
+name: Android CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ] 
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
+      - name: Build APK
+        run: ./gradlew assembleDebug
 
-    - name: Build app
-      run: ./gradlew build
-
-    - name: Run unit tests
-      run: ./gradlew test
-
-    - name: Deploy to Vercel
-      env:
-        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      run: npx vercel deploy --prod --yes --token=$VERCEL_TOKEN
-
-    - name: Deploy to Render
-      if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
-      run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
-      
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
