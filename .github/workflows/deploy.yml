@@ -2,30 +2,31 @@ name: Android CI
 
 on:
   push:
-    branches: [ main ] 
+    branches: 
+      - main  # Trigger on push to the main branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Step 2: Set up JDK (Java 17)
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: 'temurin'  # Using the Temurin JDK distribution
+          java-version: '17'  # Java version 17
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Build APK
-        run: ./gradlew assembleDebug
-
-      - name: Upload APK 
-        uses: actions/upload-artifact@v4
+      # Step 3: Set up Android SDK
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
         with:
-          name: app-debug.apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          sdk-version: '30.0.3'  # Specify the SDK version, adjust if needed
+
+      # Step 4: Make gradlew executable
+      - name: Make gradlew executable
+        run: chmod +x ./

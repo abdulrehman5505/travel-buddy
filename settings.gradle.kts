@@ -17,13 +17,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://www.jitpack.io") }
+        maven(url = "https://www.jitpack.io")
     }
-    versionCatalogs {
-        create("libs") {
-            from(files("gradle/libs.versions.toml")) // 👈 Required to load your TOML
-        }
-    }
+   
 }
 
 rootProject.name = "TravelBuddy"
