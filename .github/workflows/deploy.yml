@@ -5,7 +5,7 @@ on:
     branches: 
       - main  # Trigger on push to the main branch
 
-jobs:
+jobs: 
   build:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
