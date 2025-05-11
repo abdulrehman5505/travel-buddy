@@ -20,7 +20,7 @@ platform :android do
   lane :test do
     gradle(task: "test")
   end
-  
+
   desc "Locally build the release APK"
   lane :local_build do
     gradle(
@@ -28,5 +28,15 @@ platform :android do
       project_dir: "./"
     )
   end
+
+  desc "Build debug APK and install on connected device"
+  lane :run_local do
+    gradle(
+      task: "assembleDebug",
+      project_dir: "./"
+    )
+    sh "adb install -r app/build/outputs/apk/debug/app-debug.apk"
+  end
 end
+
 
